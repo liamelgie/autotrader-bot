@@ -204,6 +204,7 @@ class SearchResultMessages {
   sendNext(incrementBy = 1) {
     incrementBy = incrementBy > 4 ? 4 : incrementBy
     for (let i = 0; i < incrementBy; i++) {
+      if (this.inc + 1 === this.messages.length) return false
       this.messages[this.inc].send({ index: this.inc + 1, resultCount: this.messages.length })
       this.inc += 1
     }
@@ -229,7 +230,7 @@ class SearchResultMessage {
       return ['👎', '👉'].includes(reaction.emoji.name)
     }
 
-    const collector = this.message.createReactionCollector(filter, { limit: 1, time: 300000 })
+    const collector = this.message.createReactionCollector(filter, { time: 300000 })
 
     collector.on('collect', (reaction, reactionCollector) => {
       if (reaction.emoji.name === '👉') this.next()
@@ -247,7 +248,7 @@ class SearchResultMessage {
       .addField('Key Specs', this.result.keySpecs.join(' | '), true)
       .setThumbnail(this.result.image)
       .setURL(this.result.url)
-      .setFooter(`Result ${indexInfo.index} of ${indexInfo.resultCount}. React with a 👉 to see the next result or a 👎 to hide this one`)
+      .setFooter(indexInfo.index === indexInfo.resultCount ? `Result ${indexInfo.index} of ${indexInfo.resultCount}. React with a 👎 to hide this result or perform a new search to find more` : `Result ${indexInfo.index} of ${indexInfo.resultCount}. React with a 👉 to see the next result or a 👎 to hide this one`)
   }
 
   async edit(embed) {
