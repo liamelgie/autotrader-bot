@@ -8,7 +8,8 @@ class AutoTraderBot {
     this.client = new Discord.Client()
     this.client.login(this.AUTH_TOKEN)
     this.client.on('ready', () => {
-      console.log(this.client.user.username + ' - (' + this.client.user.id + ')');
+      console.log(this.client.user.username + ' - (' + this.client.user.id + ')')
+      this.client.user.setActivity('autotrader.co.uk', { type: 'WATCHING', url: 'https://www.autotrader.co.uk' })
     })
     this.client.on('message', message => {
       if (message.author.bot) return
