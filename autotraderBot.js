@@ -50,10 +50,10 @@ class AutoTraderBot {
     const embed = new Discord.RichEmbed()
       .setTitle('AutoTrader')
       .setColor('#2F1844')
-      .setDescription('Searches AutoTrader.co.uk for cars, bikes and vans with your chosen criteria then shows you the results!')
-      .addField('Commands', '\u200B', true)
+      .setDescription('Searches AutoTrader.co.uk for cars, bikes and vans with your chosen criteria then shows you the results')
       .addField('help | --help | -h', 'Displays this message')
       .addField('search {cars | bikes | vans} [--search-options]', 'Searches AutoTrader for the specified type of vehicle and displays the results')
+      .addBlankField()
       .addField('Search Options', 'You can provide a wide range of criteria to narrow your search down. The options to do this are as follows:')
       .addField('--postcode', 'The postcode to search from to find local results (defaults to BH317LE)')
       .addField('--radius', 'The radius from the postcode (in miles) to show results from (defaults to 1500)')
@@ -73,7 +73,7 @@ class AutoTraderBot {
       .addField('--gearbox', 'The gearbox in the vehicle (Manual or Automatic)(e.g. --gearbox Automatic)')
       .addField('--colour', 'The colour of the vehicle (e.g. --colour blue)')
       .addField('--page', 'The page number of results to retrieve (e.g. --page 2)(Defaults to 1)')
-      .setFooter('Developed to demonstrate AutoTraderScraper - Liam Elgie (2019)')
+      .setFooter('Developed to demonstrate AutoTraderScraper by Liam Elgie (2019)')
     channel.send(embed)
   }
 
