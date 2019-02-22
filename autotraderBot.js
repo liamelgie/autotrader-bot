@@ -51,6 +51,7 @@ class AutoTraderBot {
       .setTitle('AutoTrader')
       .setColor('#2F1844')
       .setDescription('Searches AutoTrader.co.uk for cars, bikes and vans with your chosen criteria then shows you the results')
+      .addBlankField()
       .addField('help | --help | -h', 'Displays this message')
       .addField('search {cars | bikes | vans} [--search-options]', 'Searches AutoTrader for the specified type of vehicle and displays the results')
       .addBlankField()
