@@ -49,7 +49,7 @@ class AutoTraderBot {
   _sendHelp(channel) {
     const embed = new Discord.RichEmbed()
       .setTitle('AutoTrader')
-      .setColor(0xFF0000)
+      .setColor('#2F1844')
       .setDescription('Developed by Liam Elgie to demonstrate AutoTraderScraper')
       .addField('Commands', '\u200B')
       .addField('help | --help | -h', 'Displays this message')
@@ -240,7 +240,7 @@ class SearchResultMessage {
   _generateEmbed(indexInfo) {
     return new Discord.RichEmbed()
       .setTitle(this.result.title)
-      .setColor(0xFF0000)
+      .setColor('#2F1844')
       .setDescription(this.result.description)
       .addField('Price', this.result.price, true)
       .addField('Location', this.result.location, true)
