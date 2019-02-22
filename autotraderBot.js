@@ -204,7 +204,7 @@ class SearchResultMessages {
   sendNext(incrementBy = 1) {
     incrementBy = incrementBy > 4 ? 4 : incrementBy
     for (let i = 0; i < incrementBy; i++) {
-      if (this.inc + 1 === this.messages.length) return false
+      if (this.inc === this.messages.length) return false
       this.messages[this.inc].send({ index: this.inc + 1, resultCount: this.messages.length })
       this.inc += 1
     }
