@@ -5,21 +5,15 @@ const autotrader = new AutoTraderScraper()
 class AutoTraderBot {
   constructor(authToken) {
     this.AUTH_TOKEN = authToken
-    console.log(`Creating bot with the token: ${this.AUTH_TOKEN}`)
     this.client = new Discord.Client()
     this.client.login(this.AUTH_TOKEN)
     this.client.on('ready', () => {
-      console.log('Logged in as: ');
       console.log(this.client.user.username + ' - (' + this.client.user.id + ')');
-    })
-    this.client.on('rateLimit', () => {
-      console.log('rate limited')
     })
     this.client.on('message', message => {
       if (message.author.bot) return
       if (message.content.substring(0, 1) == '!') {
         let args = message.content.substring(1).split(/((?:"[^"\\]*(?:\\[\S\s][^"\\]*)*"|'[^'\\]*(?:\\[\S\s][^'\\]*)*'|\/[^\/\\]*(?:\\[\S\s][^\/\\]*)*\/[gimy]*(?=\s|$)|(?:\\\s|\S))+)(?=\s|$)/).filter(entry => entry.trim() != '');
-        console.log(args)
         const cmd = args[0];
         args = args.splice(1);
         (async () => {
@@ -82,7 +76,6 @@ class AutoTraderBot {
   }
 
   _parseOptions(channel, args) {
-    console.log(args)
     const vehicleType = args[0]
     const postcode = args.includes('--postcode') ? !isNaN(args[args.indexOf('--postcode') + 1]) ? args[args.indexOf('--postcode') + 1] : undefined : undefined
     const radius = args.includes('--radius') ? !isNaN(args[args.indexOf('--radius') + 1]) ? args[args.indexOf('--radius') + 1] : undefined : undefined
@@ -232,19 +225,18 @@ class SearchResultMessage {
   async send(indexInfo) {
     this.message = await this.channel.send(this._generateEmbed(indexInfo))
     const filter = (reaction, user) => {
-      return ['❌', '👉'].includes(reaction.emoji.name)
+      return ['👎', '👉'].includes(reaction.emoji.name)
     }
 
     const collector = this.message.createReactionCollector(filter, { limit: 1, time: 300000 })
 
     collector.on('collect', (reaction, reactionCollector) => {
       if (reaction.emoji.name === '👉') this.next()
-      if (reaction.emoji.name === '❌') this.message.delete()
+      if (reaction.emoji.name === '👎') this.message.delete()
     })
   }
 
   _generateEmbed(indexInfo) {
-    console.log(this.result.image)
     return new Discord.RichEmbed()
       .setTitle(this.result.title)
       .setColor(0xFF0000)
@@ -254,7 +246,7 @@ class SearchResultMessage {
       .addField('Key Specs', this.result.keySpecs.join(' | '), true)
       .setThumbnail(this.result.image)
       .setURL(this.result.url)
-      .setFooter(`Result ${indexInfo.index} of ${indexInfo.resultCount}. React with a 👉 to see the next result or a ❌ to delete this one`)
+      .setFooter(`Result ${indexInfo.index} of ${indexInfo.resultCount}. React with a 👉 to see the next result or a 👎 to hide this one`)
   }
 
   async edit(embed) {
