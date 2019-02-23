@@ -86,7 +86,7 @@ class AutoTraderBot {
     const maxPrice = args.includes('--max-price') ? !isNaN(args[args.indexOf('--max-price') + 1]) ? args[args.indexOf('--max-price') + 1] : undefined : undefined
     const make = args.includes('--make') ? args[args.indexOf('--make') + 1] : undefined
     const model = args.includes('--model') ? args[args.indexOf('--model') + 1] : undefined
-    const variant = args.includes('--variant') ? args[args.indexOf('--variant') + 1] : undefined
+    const variant = args.includes('--variant') ? args[args.indexOf('--variant') + 1].replace(/["\']+/g, '') : undefined
     const condition = args.includes('--condition') ? args[args.indexOf('--condition') + 1] : undefined
     const minYear = args.includes('--min-year') ? !isNaN(args[args.indexOf('--min-year') + 1]) ? args[args.indexOf('--min-year') + 1] : undefined : undefined
     const maxYear = args.includes('--max-year') ? !isNaN(args[args.indexOf('--max-year') + 1]) ? args[args.indexOf('--max-year') + 1] : undefined : undefined
