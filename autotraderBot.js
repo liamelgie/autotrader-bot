@@ -245,7 +245,7 @@ class SearchResultMessage {
       .setTitle(this.result.title)
       .setColor('#2F1844')
       .setDescription(this.result.description)
-      .addField('Price', this.result.price, true)
+      .addField('Price', `£${this.result.price}`, true)
       .addField('Location', this.result.location, true)
       .addField('Key Specs', this.result.keySpecs.join(' | '), true)
       .setThumbnail(this.result.image)
