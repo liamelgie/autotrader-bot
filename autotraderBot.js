@@ -258,6 +258,4 @@ class SearchResultMessage {
   }
 }
 
-module.exports = {
-  bot: AutoTraderBot
-}
+module.exports = AutoTraderBot
