@@ -167,7 +167,7 @@ class AutoTraderBot {
   }
 
   async _search(options) {
-    const results = await autotrader.search(options.vehicleType).for(options)
+    const results = await autotrader.search(options.vehicleType).for({ criteria: options, results: 50 })
     .then(listings => listings.literals)
     const messages = new SearchResultMessages(options.channel, results)
     return messages
