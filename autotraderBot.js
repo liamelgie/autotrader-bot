@@ -111,7 +111,7 @@ class AutoTraderBot {
     const insurance = args.includes('--insurance') ? args[args.indexOf('--insurance') + 1] : undefined
     const tax = args.includes('--tax') ? args[args.indexOf('--tax') + 1] : undefined
     const colour = args.includes('--colour') ? args[args.indexOf('--colour') + 1] : undefined
-    const page = args.includes('--page') ? args[args.indexOf('--page') + 1] : undefined
+    const results = args.includes('--results') ? args[args.indexOf('--results') + 1] : 12
     return {
       channel,
       vehicleType,
@@ -162,14 +162,16 @@ class AutoTraderBot {
       insurance,
       tax,
       colour,
-      page
+      results
     }
   }
 
   async _search(options) {
-    const results = await autotrader.search(options.vehicleType).for({ criteria: options, results: 50 })
+    const loadingMessage = await this._sendMessage(options.channel, new LoadingMessage(options.vehicleType, options.results)._generateEmbed())
+    const results = await autotrader.search(options.vehicleType).for({ criteria: options, results: options.results })
     .then(listings => listings.literals)
-    const messages = new SearchResultMessages(options.channel, results)
+    const messages = new SearchResultMessages(options.channel, results.slice(0, options.results))
+    this._deleteMessage(loadingMessage)
     return messages
   }
 
@@ -190,6 +192,21 @@ class AutoTraderBot {
 
   async _deleteMessage(message, timeout) {
     return await message.delete(timeout)
+  }
+}
+
+class LoadingMessage {
+  constructor(vehicleType, resultCount) {
+    this.vehicleType = vehicleType
+    this.resultCount = resultCount
+  }
+
+  _generateEmbed() {
+    return new Discord.RichEmbed()
+      .setTitle(`Searching AutoTrader.co.uk 🔍`)
+      .setColor('#2F1844')
+      .setDescription(`We're currently getting the first ${this.resultCount} ${this.vehicleType} with the criteria you provided`)
+      .setFooter(`It'll probably happen so fast that you won't even be able to read this 🔥`)
   }
 }
 
