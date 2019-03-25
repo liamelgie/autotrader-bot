@@ -224,12 +224,13 @@ class SearchResultMessage {
     this.channel = channel
     this.result = result
     this.next = nextReactionCallback
+    this.sentTo = []
   }
 
   async send(indexInfo) {
     this.message = await this.channel.send(this._generateEmbed(indexInfo))
     const filter = (reaction, user) => {
-      return ['👎', '👉'].includes(reaction.emoji.name)
+      return ['👎', '👉', '💾'].includes(reaction.emoji.name)
     }
 
     const collector = this.message.createReactionCollector(filter, { time: 300000 })
@@ -237,7 +238,17 @@ class SearchResultMessage {
     collector.on('collect', (reaction, reactionCollector) => {
       if (reaction.emoji.name === '👉') this.next()
       if (reaction.emoji.name === '👎') this.message.delete()
+      if (reaction.emoji.name === '💾') this.dmToNewUsers(reaction.users, indexInfo)
     })
+  }
+
+  async dmToNewUsers(users, indexInfo) {
+    for (let user of users) {
+      if (!this.sentTo.includes(user[0])) {
+        user[1].send(this._generateEmbed(indexInfo))
+        this.sentTo.push(user[0])
+      }
+    }
   }
 
   _generateEmbed(indexInfo) {
