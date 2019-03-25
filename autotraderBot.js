@@ -111,7 +111,7 @@ class AutoTraderBot {
     const insurance = args.includes('--insurance') ? args[args.indexOf('--insurance') + 1] : undefined
     const tax = args.includes('--tax') ? args[args.indexOf('--tax') + 1] : undefined
     const colour = args.includes('--colour') ? args[args.indexOf('--colour') + 1] : undefined
-    const page = args.includes('--page') ? args[args.indexOf('--page') + 1] : undefined
+    const results = args.includes('--results') ? args[args.indexOf('--results') + 1] : 12
     return {
       channel,
       vehicleType,
@@ -167,9 +167,10 @@ class AutoTraderBot {
   }
 
   async _search(options) {
-    const results = await autotrader.search(options.vehicleType).for({ criteria: options, results: 50 })
+    const results = await autotrader.search(options.vehicleType).for({ criteria: options, results: options.results })
     .then(listings => listings.literals)
     const messages = new SearchResultMessages(options.channel, results)
+    const messages = new SearchResultMessages(options.channel, results.slice(0, options.results))
     return messages
   }
 
