@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>AutoTrader Bot</title>
+    <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
+    <style type="text/css">
+      html, body {
+        padding: 0;
+        margin: 0;
+        font-family: 'Catamaran', sans-serif;
+        color: #383838;
+      }
+      a {
+        color: #5B6CE0;
+      }
+      section {
+        max-width: 1000px;
+      }
+      h1 {
+        color: black;
+      }
+      span.type-cursor {
+        color: white;
+        animation: blinker 1s step-start infinite;
+        position: relative;
+        top: 2px;
+
+      }
+      @keyframes blinker {
+      50% {
+          opacity: 0;
+        }
+      }
+      .smooth-gradient {
+        background: linear-gradient(270deg, #F073CA, #6254FB, #8C9BFF, #F073CA);
+        background-size: 600% 600%;
+
+        -webkit-animation: smooth-gradient 50s ease infinite;
+        -moz-animation: smooth-gradient 50s ease infinite;
+        animation: smooth-gradient 50s ease infinite;
+      }
+      @-webkit-keyframes smooth-gradient {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
+      @-moz-keyframes smooth-gradient {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
+      @keyframes smooth-gradient {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
+      header {
+        height: 10vh;
+        display: flex;
+        flex-direction: row;
+        font-size: 1.4em;
+      }
+      header > div#links {
+        margin-left: auto;
+        margin-right: 10vw;
+        display: inline-flex;
+        justify-content: space-between;
+        width: 20vw;
+        max-width: 350px;
+      }
+      header > div#links > a {
+        color: white;
+        line-height: 16vh;
+        color: white;
+        text-decoration: none;
+      }
+      header > div#logo-container {
+        display: inline-flex;
+        margin-left: 10vw;
+        align-self: flex-start;
+
+      }
+      header > div#logo-container > span {
+        color: white;
+        line-height: 16vh;
+        color: white;
+      }
+      section#landing > img {
+        width: 80vw;
+        display:block;
+        margin:auto;
+        box-shadow: 0px 0px 50px black;
+      }
+      section#landing {
+        height: 90vh;
+        display: grid;
+        grid-template-columns: 1fr;
+        max-width: 100vw;
+      }
+      section#landing > span#demo-foreword {
+        color: white;
+        font-size: 2.6em;
+        font-weight: 300;
+        text-align: center;
+        display: block;
+        align-self: center;
+        justify-self: center;
+        padding: 0 0 5vh;
+      }
+      div.standout {
+        background: rgba(241,240,255, 0.18);
+        padding: 5vh 0;
+        margin: 0 0 5vh 0;
+      }
+      section#about {
+        width: 60vw;
+        margin: 0 auto 0;
+        font-size: 1.2em;
+      }
+      section#about p {
+        margin: 0;
+        padding-bottom: 1vh;
+      }
+      section#features {
+        display: grid;
+        width: 60vw;
+        margin: 0 auto;
+        grid-template-columns: 1fr 1fr;
+      }
+      section#features > span {
+        font-size: 1.4em;
+        display: block;
+        text-align: center;
+      }
+      section#features > div.row {
+        grid-column: 1 / span 2;
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
+      section#features > div.row > span.feature > span.emoji {
+        font-size: 1.2em;
+        display: inline-block;
+        margin-right: 0.5em;
+      }
+      section#features > div.row > span.feature {
+        font-size: 1.2em;
+        display: block;
+      }
+      section#install {
+        width: 60vw;
+        margin: 0 auto;
+        font-size: 1.2em;
+      }
+      section#install > p > a.invite-button {
+        display: block;
+        margin: 50px auto;
+        padding: 10px 30px;
+        color: white;
+        border: 1px solid rgba(0, 0, 0, 0.03);
+        border-radius: 25px;
+        box-shadow: 0px 0px 15px lightgray;
+        text-align: center;
+        width: 225px;
+        text-decoration: none;
+        transition: 0.5s ease-out;
+        letter-spacing: 0.5px;
+      }
+      section#install > p > a.invite-button:hover {
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1);
+      }
+      section#usage {
+        width: 60vw;
+        margin: 0 auto;
+        font-size: 1.2em;
+      }
+      section#usage > table {
+        margin: 0 auto;
+        border-collapse: collapse;
+        border-spacing: 80px 1rem;
+        font-size: 1em;
+      }
+      td.flag, th.flag {
+        width: 30%;
+        text-align: center;
+        padding: 0 10% 0 0;
+      }
+      td.def {
+        width: 60%;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 93, 159, 0.02);
+        padding: 10px;
+      }
+      span.code {
+        background: #f8f9fa;
+        color: #5B6CE0;
+        padding: 0 10px;
+        letter-spacing: 0.5px;
+      }
+      td.flag > span.code {
+        margin-top: 7px;
+        display: block;
+        text-align: center;
+      }
+      span.example-command {
+        display: block;
+        margin: 20px 0px;
+        background: #f8f9fa;
+        padding: 10px 20px;
+        color: #5B6CE0;
+        letter-spacing: 0.5px;
+      }
+      section#built-with {
+        display: grid;
+        width: 60vw;
+        margin: 5vh auto 0;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        font-size: 0.8em;
+        color: gray;
+      }
+      section#built-with > h1 {
+        grid-column: 1 / span 2;
+      }
+      section#built-with > div {
+      }
+      section#built-with > div > img {
+        width: 5vw;
+        margin: 0 auto;
+      }
+      section#built-with > p {
+      }
+      footer {
+        background: #0d0d0d;
+      }
+      footer span.love {
+        color: #6254FB
+      }
+    </style>
+  </head>
+  <body>
+    <header class='smooth-gradient'>
+      <div id='logo-container'>
+          <span>AutoTrader Bot</span>
+      </div>
+      <div id='links'>
+        <a href='https://discordapp.com/api/oauth2/authorize?client_id=548472679540326401&permissions=18432&scope=bot'>
+          Invite
+        </a>
+        <a href='https://github.com/liamelgie/autotrader-bot'>
+          GitHub
+        </a>
+        <a href=''>
+          Usage
+        </a>
+      </div>
+    </header>
+    <section id='landing' class='smooth-gradient'>
+        <span id='demo-foreword'>Find your new <span class="typer" data-deleteDelay='1000' data-delay="100" data-words="car,bike,van" data-colors="white"></span><span class='type-cursor'>|</span><br /> from the comfort of your Discord server</span>
+        <!-- <img src='demo.gif' /> -->
+    </section>
+    <div class='standout'>
+      <section id='about'>
+        <h1>Features</h1>
+        <p>
+          Looking to find your dream car or something a little more realistic? Do it right inside your Discord server and let your friends weigh in with their ever important opinions 😒
+        </p>
+      </section>
+      <section id='features'>
+        <div class='row'>
+            <span class='feature'><span class='emoji'>🔍</span>Search hundreds of thousands of vehicles in a single message</span>
+        </div>
+        <div class='row'>
+            <span class='feature'><span class='emoji'>🔥</span>Retrieve results in seconds</span>
+        </div>
+        <div class='row'>
+            <span class='feature'><span class='emoji'>👉</span>Navigate your matches cleanly with reactions</span>
+        </div>
+        <div class='row'>
+            <span class='feature'><span class='emoji'>💾</span>Found something you like? Have it DM'd to you so it never gets lost</span>
+        </div>
+      </section>
+    </div>
+    <section id='install'>
+      <h1>Add It To Your Server</h1>
+      <p>
+        Simply invite the bot using the following link and you're good to go! No set up required 💪
+        <a class='invite-button smooth-gradient' href='https://discordapp.com/api/oauth2/authorize?client_id=548472679540326401&permissions=18432&scope=bot'>Invite AutoTrader Bot</a>
+      </p>
+    </section>
+    <section id='usage'>
+      <h1>How To Use</h1>
+      <p>
+        Searching for a car is as easy as: <span class='example-command'>!autotrader search cars</span> You can also search for <span class='code'>bikes</span> and <span class='code'>vans</span>. <br />
+        Finding a vehicle that meets your specific tastes is a little more involved but is still very straightforward! <br />
+        If you're looking to find a new Tesla, you'd type the following: <span class='example-command'>!autotrader search cars --make Tesla --condition New</span>
+        The words prefixed with double hyphens (--) are called flags and there are a bunch of them that you can use to narrow down your search. <br />You can find a complete list of them <a href="">here</a> but these are some of the most common:
+        <table>
+          <tr>
+            <th class='flag'>
+              Flag
+            </th>
+            <th class='def'>
+              Definition
+            </th>
+          </tr>
+          <tr>
+            <td class='flag'>
+                <span class='code'>--make</span>
+            </td>
+            <td class='def'>
+              The make of the vehicle (e.g. Tesla, Ford, Nissan)
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+                <span class='code'>--model</span>
+            </td>
+            <td class='def'>
+              The model of the vehicle (e.g. Model S, Focus, Skyline)
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+                <span class='code'>--variant</span>
+            </td>
+            <td class='def'>
+              The variant of the vehicle (e.g. ST, EcoBoost)
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+                <span class='code'>--min-year</span>
+                <span class='code'>--max-year</span>
+            </td>
+            <td class='def'>
+              The minimum or maximum year of manufacture
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+                <span class='code'>--min-price</span>
+                <span class='code'>--max-price</span>
+            </td>
+            <td class='def'>
+              The minimum or maximum price (in £) to search for
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+                <span class='code'>--results</span>
+            </td>
+            <td class='def'>
+              The amount of results to get from the search
+            </td>
+          </tr>
+        </table><br />
+        <span class='code'>NOTE:</span> If your input contains a space (e.g. Range Rover), put some quotes around it so it's understood as a single value (e.g. "Ranger Rover")
+      </p>
+    </section>
+    <footer>
+      <section id='built-with'>
+        <div>
+          <p>
+            Made with <span class='love'>♥</span> by <a href='https://github.com/liamelgie'>Liam Elgie</a><br />
+            AutoTrader Bot is completely open-source under the <a href='https://github.com/liamelgie/autotrader-bot/blob/master/LICENSE'>GPL 3.0</a> license. <br  />
+            Know what you're doing with JS? Clone or fork <a href='https://github.com/liamelgie/autotrader-bot'>my repo</a> and commit to your heart's content.
+          </p>
+        </div>
+        <div>
+          <p>
+            This bot was developed to demonstrate the features of AutoTrader Scraper, an npm module built to pull data from AutoTrader.co.uk. If you wish to use this module in your own projects, you can find it <a href='https://www.npmjs.com/package/autotrader-scraper'>here</a>.
+          </p>
+        </div>
+      </section>
+    </footer>
+    <script src='js/typer.js'></script>
+  </body>
+</html>
