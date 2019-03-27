@@ -203,10 +203,10 @@ class LoadingMessage {
 
   _generateEmbed() {
     return new Discord.RichEmbed()
-      .setTitle(`Searching AutoTrader.co.uk 🔍`)
+      .setTitle(`🔎 Searching AutoTrader.co.uk`)
       .setColor('#2F1844')
-      .setDescription(`We're currently getting the first ${this.resultCount} ${this.vehicleType} with the criteria you provided`)
-      .setFooter(`It'll probably happen so fast that you won't even be able to read this 🔥`)
+      .setDescription(`Getting the first ${this.resultCount} ${this.vehicleType} with the criteria you provided...`)
+      .setFooter(`It'll probably happen so fast that you'll never know what this says 🔥`)
   }
 }
 
