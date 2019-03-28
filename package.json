@@ -1,15 +1,15 @@
 {
   "name": "autotrader-bot",
-  "version": "0.2.1",
-  "description": "Discord bot for the vehicle marketplace, Auto Trader (UK)",
-  "main": "autotraderBot.js",
+  "version": "0.3.0",
+  "description": "Discord bot for the online vehicle marketplace, Auto Trader (UK)",
+  "main": "autotrader-bot.js",
   "files": [
-    "autotraderBot.js"
+    "autotrader-bot.js"
   ],
   "author": "Liam Elgie",
   "license": "MIT",
   "dependencies": {
-    "autotrader-scraper": "^0.10.0",
+    "autotrader-scraper": "^1.0.0",
     "discord.js": "^11.4.2",
     "uws": "^9.148.0"
   }
