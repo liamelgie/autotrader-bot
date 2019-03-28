@@ -1,6 +1,6 @@
 {
   "name": "autotrader-bot",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Discord bot for the vehicle marketplace, Auto Trader (UK)",
   "main": "autotraderBot.js",
   "files": [
