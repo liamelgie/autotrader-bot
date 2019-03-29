@@ -56,7 +56,7 @@
           100%{background-position:0% 50%}
       }
       header {
-        height: 10vh;
+        height: 5vh;
         display: flex;
         flex-direction: row;
         font-size: 1.4em;
@@ -71,8 +71,13 @@
       }
       header > div#links > a {
         color: white;
-        line-height: 16vh;
+        line-height: 5vh;
+        text-decoration: none;
+      }
+      header > div#links > a.active {
+        line-height: 5vh;
         color: white;
+        text-shadow: 2px 2px 20px #000;
         text-decoration: none;
       }
       header > div#logo-container {
@@ -83,7 +88,7 @@
       }
       header > div#logo-container > a {
         color: white;
-        line-height: 16vh;
+        line-height: 5vh;
         text-decoration: none;
       }
       section#landing > img {
@@ -242,7 +247,7 @@
   <body>
     <header class='smooth-gradient'>
       <div id='logo-container'>
-          <a href='./'>AutoTrader Bot</a>
+          <a href='../'>AutoTrader Bot</a>
       </div>
       <div id='links'>
         <a href='https://discordapp.com/api/oauth2/authorize?client_id=548472679540326401&permissions=18432&scope=bot'>
@@ -251,51 +256,18 @@
         <a href='https://github.com/liamelgie/autotrader-bot'>
           GitHub
         </a>
-        <a href='usage/'>
+        <a class='active' href='usage/'>
           Usage
         </a>
       </div>
     </header>
-    <section id='landing' class='smooth-gradient'>
-        <span id='demo-foreword'>Find your new <span class="typer" data-deleteDelay='1000' data-delay="100" data-words="car,bike,van" data-colors="white"></span><span class='type-cursor'>|</span><br /> from the comfort of your Discord server</span>
-        <!-- <img src='demo.gif' /> -->
-    </section>
-    <div class='standout'>
-      <section id='about'>
-        <h1>Features</h1>
-        <p>
-          Looking to find your dream car or something a little more realistic? Do it right inside your Discord server and let your friends weigh in with their ever important opinions 😒
-        </p>
-      </section>
-      <section id='features'>
-        <div class='row'>
-            <span class='feature'><span class='emoji'>🔍</span>Search hundreds of thousands of vehicles in a single message</span>
-        </div>
-        <div class='row'>
-            <span class='feature'><span class='emoji'>🔥</span>Retrieve results in seconds</span>
-        </div>
-        <div class='row'>
-            <span class='feature'><span class='emoji'>👉</span>Navigate your matches cleanly with reactions</span>
-        </div>
-        <div class='row'>
-            <span class='feature'><span class='emoji'>💾</span>Found something you like? Have it DM'd to you so it never gets lost</span>
-        </div>
-      </section>
-    </div>
-    <section id='install'>
-      <h1>Add It To Your Server</h1>
-      <p>
-        Simply invite the bot using the following link and you're good to go! No set up required 💪
-        <a class='invite-button smooth-gradient' href='https://discordapp.com/api/oauth2/authorize?client_id=548472679540326401&permissions=18432&scope=bot'>Invite AutoTrader Bot</a>
-      </p>
-    </section>
     <section id='usage'>
-      <h1>How To Use</h1>
+      <h1>Usage</h1>
       <p>
         Searching for a car is as easy as: <span class='example-command'>!autotrader search cars</span> You can also search for <span class='code'>bikes</span> and <span class='code'>vans</span>. <br />
         Finding a vehicle that meets your specific tastes is a little more involved but is still very straightforward! <br />
         If you're looking to find a new Tesla, you'd type the following: <span class='example-command'>!autotrader search cars --make Tesla --condition New</span>
-        The words prefixed with double hyphens (--) are called flags and there are a bunch of them that you can use to narrow down your search. <br />You can find a complete list of them <a href="">here</a> but these are some of the most common:
+        The words prefixed with double hyphens (--) are called flags and there are a bunch of them that you can use to narrow down your search. <br />The following is a complete list of all the different options supported by AutoTrader Bot and their meaning:
         <table>
           <tr>
             <th class='flag'>
@@ -353,6 +325,130 @@
             </td>
             <td class='def'>
               The amount of results to get from the search
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+                <span class='code'>--postcode</span>
+            </td>
+            <td class='def'>
+              The postcode to center the search around
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+                <span class='code'>--radius</span>
+            </td>
+            <td class='def'>
+              The distance in which to search from the given postcode
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+                <span class='code'>--condition</span>
+            </td>
+            <td class='def'>
+              The condition of the vehicle; either new, used or nearly new
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+              <span class='code'>--min-mileage</span>
+              <span class='code'>--max-mileage</span>
+            </td>
+            <td class='def'>
+              The minimum or maximum mileage done by the vehicle
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+              <span class='code'>--min-cc</span>
+              <span class='code'>--max-cc</span>
+            </td>
+            <td class='def'>
+              The minimum or maximum cc of the vehicle (only applies to bikes)
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+              <span class='code'>--body</span>
+            </td>
+            <td class='def'>
+              The body type of the vehicle (i.e. SUV or Coupe)
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+              <span class='code'>--fuel-type</span>
+            </td>
+            <td class='def'>
+              The type of fuel used by the vehicle (petrol or diesel)
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+              <span class='code'>--gearbox</span>
+            </td>
+            <td class='def'>
+              The type of gearbox that vehicle uses (either manual or automatic)
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+              <span class='code'>--colour</span>
+            </td>
+            <td class='def'>
+              The colour of the vehicle
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+              <span class='code'>--cab</span>
+            </td>
+            <td class='def'>
+              The cab type of the vehicle (only applies to vans)
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+              <span class='code'>--wheelbase</span>
+            </td>
+            <td class='def'>
+              The wheelbase of the vehicle (only applies to vans)
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+              <span class='code'>--min-engine-size</span>
+              <span class='code'>--max-engine-size</span>
+            </td>
+            <td class='def'>
+              The minimum or maximum size of the vehicle's engine (i.e. 1.2)
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+              <span class='code'>--drivetrain</span>
+            </td>
+            <td class='def'>
+              The drivetrain of the vehicle (i.e. Four Wheel Drive)
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+              <span class='code'>--doors</span>
+            </td>
+            <td class='def'>
+              The number of doors that the vehicle has
+            </td>
+          </tr>
+          <tr>
+            <td class='flag'>
+              <span class='code'>--min-seats</span>
+              <span class='code'>--max-seats</span>
+            </td>
+            <td class='def'>
+              The minimum or maximum number of seats that the vehicle has
             </td>
           </tr>
         </table><br />
